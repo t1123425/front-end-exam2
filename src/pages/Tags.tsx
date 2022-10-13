@@ -8,4 +8,4 @@ const Tags:React.FC = () => {
     )
 }
 
-export default Tags
+export default Tags;

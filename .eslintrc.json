@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "./node_modules/gts/",
+    "plugin:react/recommended"
+  ],
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "rules": {
+    "prettier/prettier": ["off", {"singleQuote": true }]
+  }
+}
