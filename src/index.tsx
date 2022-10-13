@@ -1,7 +1,13 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ReactDOM from 'react-dom/client';
 import CssBaseline from '@mui/material/CssBaseline';
 import App from './App';
+import Tags from './pages/Tags';
+import Search from './pages/Search';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
+import './assets/main.scss'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -9,7 +15,16 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <CssBaseline />
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route index element={<Home />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/tags" element={<Tags />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
