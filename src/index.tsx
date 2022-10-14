@@ -2,6 +2,8 @@ import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme';
 import App from './App';
 import Tags from './pages/Tags';
 import Search from './pages/Search';
@@ -14,17 +16,19 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <CssBaseline />
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<Home />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/tags" element={<Tags />} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<Home />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/tags" element={<Tags />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>
 );
 
