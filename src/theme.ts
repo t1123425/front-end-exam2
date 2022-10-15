@@ -5,6 +5,15 @@ const theme = createTheme({
     typography:{
       fontFamily:'UbuntuRegular,Arial'
     },
+    breakpoints:{
+      values:{
+        xs:0,
+        sm:600,
+        md:900,
+        lg:1440,
+        xl:1536
+      }
+    },
     components:{
         MuiCssBaseline: {
             styleOverrides: `
@@ -33,6 +42,7 @@ const theme = createTheme({
         MuiGrid:{
           styleOverrides:{
             root:{
+              width:'100%',
               marginTop:0
             }
           }

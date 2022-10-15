@@ -4,25 +4,25 @@ import { Outlet } from 'react-router-dom'
 import Box from '@mui/material/Box';
 import { Grid } from '@mui/material';
 import FollowList from './components/FollowList';
-
+import BPMatches from './helpers/BreakPointMatch'
 function App() {
   return (
     <Box sx={{
       width:1,
       height:1,
-      flexGrow: 1,
       backgroundColor:'primary.dark',
       color:'primary.contrastText'
     }}>
-      <Grid container spacing={3}>
-        <Grid xs={2} item>
-          <NavBar />
-        </Grid>
-        <Grid xs={5} item>
+     <NavBar />
+     <Box component="main">
+        <Outlet />
+     </Box>
+      {/* <Grid sx={{height:1}} justifyContent="center" container>
+        <Grid sx={{maxWidth:BPMatches('lg')?850:725}} item>
           <Outlet />
         </Grid>
-      </Grid>
-      <FollowList />
+      </Grid> */}
+      <FollowList/>
     </Box>
   );
 }

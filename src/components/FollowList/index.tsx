@@ -3,7 +3,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-
+import BPMatches from '../../helpers/BreakPointMatch';
 function a11yProps(index: number) {
     return {
       id: `simple-tab-${index}`,
@@ -19,9 +19,11 @@ const FollowList:React.FC = () => {
     };
     return (
         <Box sx={{
-            width:375,
+            maxWidth:375,
+            width:1,
             height:1,
             backgroundColor:'primary.main',
+            display:BPMatches('lg')?'none':'block',
             position:'fixed',
             top:0,
             right:0
