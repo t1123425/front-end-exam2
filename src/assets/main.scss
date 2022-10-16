@@ -1,8 +1,15 @@
 //For custom style
 //main
-html,body,#root{
-  width:100%;
+html{
   height:100%;
+}
+body{
+  min-height: 100%;
+  display: flex;
+}
+#root{
+  display: flex;
+  width:100%;
   padding: 0;
   min-height: 900px;
 }

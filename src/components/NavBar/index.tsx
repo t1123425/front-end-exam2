@@ -1,31 +1,39 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
 import Box from '@mui/material/Box';
-
-
-const NavBar: React.FC = () => {
+import Drawer from '@mui/material/Drawer';
+import LinksList from './LinksList';
+interface navProp{
+  mdMatch?:boolean
+  maxWidth?:number | string
+}
+const NavBar: React.FC<navProp> = props => {
+  const linksData = [
+    {
+      name:'Home',
+      path:'/'
+    },
+    {
+      name:'Tags',
+      path:'/tags'
+    }
+  ]
   return (
     <Box
     component="nav"
     sx={{
-      width:1,
-      height:1,
-      maxWidth:80,
-      textAlign:'center',
+      flexGrow:props.mdMatch?0:1,
+      maxWidth:props.mdMatch?'100%':80,
       backgroundColor:'primary.main',
-      // position:'fixed',
-      // top:0,
-      // left:0
     }}>
-      <h1 className="m-0 logoStyle">LOGO</h1>
-      <ul className="defaultList">
-        <li>
-          <NavLink to="/">Home</NavLink>
-        </li>
-        <li>
-          <NavLink to="/tags">Tags</NavLink>
-        </li>
-      </ul>
+      <h1 style={{display:props.mdMatch?'block':'none'}} className="m-0 logoStyle">LOGO</h1>
+      <Drawer
+        anchor={props.mdMatch?'bottom':'left'}
+        variant="permanent"
+        sx={{'& .MuiPaper-root':{backgroundColor:'primary.main'}}}
+        open>
+        <h1 style={{display:props.mdMatch?'none':'block'}} className="m-0 logoStyle">LOGO</h1>
+        <LinksList listDirect={props.mdMatch?'row':'column'} links={linksData} />
+      </Drawer>
     </Box>
   );
 };

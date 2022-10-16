@@ -1,10 +1,13 @@
-import React from 'react';
-
+import React, {Fragment}from 'react';
+import { Grid } from '@mui/material';
 const Tags:React.FC = () => {
     return (
-        <section>
-            <h1>Tags</h1>
-        </section>
+        <Fragment>
+             <h1>Tags</h1>
+             <Grid container>
+                <Grid item></Grid>
+            </Grid>
+        </Fragment>
     )
 }
 
