@@ -7,15 +7,16 @@ import BPMatches from './helpers/BreakPointMatch'
 function App() {
   const lgMatch = BPMatches('lg');
   const mdMatch = BPMatches('md');
+  // 505px is space  with followList & router page content
   const lgMainStyle = {
-    maxWidth:725,
+    maxWidth:'calc(100% - 505px)',
     margin:0,
-    paddingLeft:'130px'
+    padding:'0 0 0 130px'
   }
   const smMainStyle = {
     maxWidth:850,
     margin:'0 auto',
-    paddingLeft:0
+    padding:'0 20px'
   }
   return (
     <Box sx={{
@@ -28,7 +29,7 @@ function App() {
     }}>
      <NavBar mdMatch={mdMatch} />
      <Box component="main" sx={{flexGrow:1}}>
-        <Box component="section" sx={lgMatch?smMainStyle:lgMainStyle} >
+        <Box component="section" sx={{height:1,...(lgMatch?smMainStyle:lgMainStyle)}} >
            <Outlet />
         </Box>
      </Box>

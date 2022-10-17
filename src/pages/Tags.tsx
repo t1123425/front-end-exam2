@@ -1,13 +1,16 @@
-import React, {Fragment}from 'react';
-import { Grid } from '@mui/material';
+import React from 'react';
+import { Grid ,Box} from '@mui/material';
+import Typography from '@mui/material/Typography';
 const Tags:React.FC = () => {
     return (
-        <Fragment>
-             <h1>Tags</h1>
+        <Box sx={{display:'flex',flexDirection:'column'}}>
+            <Typography variant="h1" sx={{fontSize:'1.8rem',margin:'80px 0 24px'}} color="primary.contrastText">
+                Tags
+            </Typography>
              <Grid container>
                 <Grid item></Grid>
             </Grid>
-        </Fragment>
+        </Box>
     )
 }
 
