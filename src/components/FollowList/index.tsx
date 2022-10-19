@@ -3,6 +3,13 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemButton from '@mui/material/ListItemButton';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
 function a11yProps(index: number) {
     return {
       id: `simple-tab-${index}`,
@@ -36,7 +43,36 @@ const FollowList:React.FC<followListProps> = props => {
                     <Tab label="Following" {...a11yProps(1)} />
                 </Tabs>
             </Box>
-            <Container></Container>
+            <Container sx={{padding:'0 16px'}} disableGutters >
+              <List sx={{width:1}}>
+                 <ListItem sx={{justifyContent:'space-between',padding:'8px 0'}}>
+                    <ListItemAvatar>
+                      <Avatar alt="Follower" variant="rounded"></Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                    primary="Fullname"
+                    secondary={
+                        <Typography sx={{color:'rgba(255,255,255,0.5)'}}>
+                            @username
+                        </Typography>
+                    }/>
+                    <ListItemButton className='followBtn' >follow</ListItemButton>
+                 </ListItem>
+                 <ListItem sx={{justifyContent:'space-between',padding:'8px 0'}}>
+                    <ListItemAvatar>
+                      <Avatar alt="Follower" variant="rounded"></Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                    primary="Fullname"
+                    secondary={
+                        <Typography sx={{color:'rgba(255,255,255,0.5)'}}>
+                            @username
+                        </Typography>
+                    }/>
+                    <ListItemButton className='followBtn' selected >following</ListItemButton>
+                 </ListItem>
+              </List>
+            </Container>
         </Box>
     )
 }

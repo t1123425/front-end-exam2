@@ -38,6 +38,8 @@ const theme = createTheme({
                 background:'linear-gradient(270deg, #FFD25F 0.13%, #FF5C01 100%)'
               },
               thumb:{
+                width:'26px',
+                height:'26px',
                 backgroundColor:'#000',
                 border: '6px solid #FFD05D'
               },
@@ -81,11 +83,41 @@ const theme = createTheme({
                 padding:'13px 16px',
                 borderRadius:4,
                 lineHeight:1,
+                border:'1px solid #fff',
                 '&:hover':{
                   backgroundColor:'#121212',
                   color:'#fff',
-                  border:'1px solid #fff'
                 }
+              }
+            }
+          }
+        },
+        MuiListItemButton:{
+          styleOverrides:{
+            root:{
+              padding:'8px 10px',
+              justifyContent:'center',
+              '&.followBtn':{
+                borderRadius:'20px',
+                minWidth:'60px',
+                fontSize:'12px',
+                border:'1px solid #fff',
+                backgroundColor:'#121212',
+                color:'#fff',
+                flexGrow:0,
+                '&:hover':{
+                  color:'#121212',
+                  backgroundColor:'#fff',
+                },
+                '&.Mui-selected':{
+                  color:'#121212',
+                  backgroundColor:'#fff',
+                  '&:hover':{
+                    backgroundColor:'#121212',
+                    color:'#fff',
+                  }
+                }
+
               }
             }
           }
