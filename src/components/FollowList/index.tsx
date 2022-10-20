@@ -20,9 +20,46 @@ interface followListProps{
     isShow?:boolean,
     width?:number | string
 }
+interface followerData{
+    fullname:string,
+    username:string,
+    isFollowing:boolean
+}
+interface userFollowStatus{
+    [key: string]:followerData[]
+    Followers:followerData[]
+    Following:followerData[]
+}
 const FollowList:React.FC<followListProps> = props => {
     const [value, setValue] = useState(0);
+    const followerTabs:string[] = ['Followers','Following']
+    const followerMockData:userFollowStatus = {
+        Followers:[
+            {
+                fullname:'test1',
+                username:'@test1',
+                isFollowing:false
+            },
+            {
+                fullname:'test2',
+                username:'@test2',
+                isFollowing:false
+            },
+            {
+                fullname:'test3',
+                username:'@test3',
+                isFollowing:false
+            }
+        ],
+        Following:[
+            {
+                fullname:'test4',
+                username:'@test4',
+                isFollowing:true
+            }
 
+        ]
+    }
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
@@ -45,32 +82,30 @@ const FollowList:React.FC<followListProps> = props => {
             </Box>
             <Container sx={{padding:'0 16px'}} disableGutters >
               <List sx={{width:1}}>
-                 <ListItem sx={{justifyContent:'space-between',padding:'8px 0'}}>
-                    <ListItemAvatar>
-                      <Avatar alt="Follower" variant="rounded"></Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                    primary="Fullname"
-                    secondary={
-                        <Typography sx={{color:'rgba(255,255,255,0.5)'}}>
-                            @username
-                        </Typography>
-                    }/>
-                    <ListItemButton className='followBtn' >follow</ListItemButton>
-                 </ListItem>
-                 <ListItem sx={{justifyContent:'space-between',padding:'8px 0'}}>
-                    <ListItemAvatar>
-                      <Avatar alt="Follower" variant="rounded"></Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                    primary="Fullname"
-                    secondary={
-                        <Typography sx={{color:'rgba(255,255,255,0.5)'}}>
-                            @username
-                        </Typography>
-                    }/>
-                    <ListItemButton className='followBtn' selected >following</ListItemButton>
-                 </ListItem>
+                {
+                    followerMockData[followerTabs[value]].map((e,i)=>{
+                        return (
+                            <ListItem key={i} sx={{justifyContent:'space-between',padding:'8px 0'}}>
+                                <ListItemAvatar>
+                                <Avatar alt="Follower" variant="rounded"></Avatar>
+                                </ListItemAvatar>
+                                <ListItemText
+                                primary={e.fullname}
+                                secondary={
+                                    <Typography sx={{color:'rgba(255,255,255,0.5)'}}>
+                                        {e.username}
+                                    </Typography>
+                                }/>
+                                <ListItemButton className='followBtn' selected={e.isFollowing} >
+                                    {
+                                        e.isFollowing?'Following':'Follow'
+                                    }
+                                </ListItemButton>
+                            </ListItem>
+                        )
+                    })
+                }
+
               </List>
             </Container>
         </Box>
