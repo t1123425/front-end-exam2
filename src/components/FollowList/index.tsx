@@ -87,7 +87,7 @@ const FollowList:React.FC<followListProps> = props => {
                         return (
                             <ListItem key={i} sx={{justifyContent:'space-between',padding:'8px 0'}}>
                                 <ListItemAvatar>
-                                <Avatar alt="Follower" variant="rounded"></Avatar>
+                                    <Avatar alt="Follower" variant="rounded"></Avatar>
                                 </ListItemAvatar>
                                 <ListItemText
                                 primary={e.fullname}

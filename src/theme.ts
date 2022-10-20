@@ -1,6 +1,7 @@
 import { createTheme } from '@mui/material/styles';
 import UbuntuRegularTtf from './assets/fonts/Ubuntu-Regular.ttf';
 
+
 const theme = createTheme({
     typography:{
       fontFamily:'UbuntuRegular,Arial'
@@ -24,6 +25,25 @@ const theme = createTheme({
                 src: "url(${UbuntuRegularTtf}) format('ttf')";
               }
             `,
+        },
+        MuiTypography:{
+          styleOverrides:{
+            root:{
+              '&.pageTitle':{
+                fontSize:'1.8rem',
+                letterSpacing:'0.25px',
+                marginBottom:'24px',
+                position:'relative',
+                '.pageBack':{
+                  color:'#fff',
+                  position:'absolute',
+                  bottom:'0',
+                  margin:'auto',
+                  left:'-30px'
+                }
+              },
+            }
+          }
         },
         MuiSlider:{
           styleOverrides:{
@@ -141,6 +161,20 @@ const theme = createTheme({
             root:{
               width:'100%',
               marginTop:0
+            }
+          }
+        },
+        MuiListItemAvatar:{
+          styleOverrides:{
+            root:{
+              minWidth:'55px'
+            }
+          }
+        },
+        MuiAvatar:{
+          styleOverrides:{
+            root:{
+              border:'1px solid #F8F8F8'
             }
           }
         }

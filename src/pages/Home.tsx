@@ -2,12 +2,14 @@ import React, {useState} from 'react';
 import {Grid, Box, FormControl, OutlinedInput, Slider} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom'
 interface SearchData{
   value:string,
   pageRange:number | number[]
 }
 
 const Home: React.FC = () => {
+  const history = useNavigate()
   const [searchData, setSearchData] = useState<SearchData>({
     value: '',
     pageRange: 30,
@@ -42,6 +44,9 @@ const Home: React.FC = () => {
   const handleChange = (prop: keyof SearchData) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchData({...searchData, [prop]: event.target.value});
   };
+  const searchSubmit = () => {
+    history('/search')
+  }
   const searchBoxStyle = {
     paddingBottom: '30px',
     marginTop: '30px',
@@ -103,7 +108,7 @@ const Home: React.FC = () => {
         </Box>
       </Grid>
       <Grid item sx={{paddingBottom: '90px'}}>
-        <Button className='customBtn' variant="contained" sx={{maxWidth: '343px', width: 1}}>Search</Button>
+        <Button className='customBtn' onClick={searchSubmit} variant="contained" sx={{maxWidth: '343px', width: 1}}>Search</Button>
       </Grid>
     </Grid>
   );
