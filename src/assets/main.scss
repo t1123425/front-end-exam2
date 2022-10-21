@@ -1,5 +1,23 @@
 //For custom style
 //main
+
+/* custom scrollbar width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #181818; 
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:  rgba(255, 255, 255, 0.2);
+  border-radius: 25px; 
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4); 
+}
 html{
   height:100%;
 }

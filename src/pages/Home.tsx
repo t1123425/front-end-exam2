@@ -109,6 +109,8 @@ const Home: React.FC = () => {
           </Box>
           <Box sx={{width: 1}}>
             <Slider
+              min={rangeMarks[0].value}
+              max={rangeMarks[rangeMarks.length - 1].value}
               defaultValue={rangeMarks[4].value}
               onChange={(event: Event, newValue: number | number[]) => {
                 setSearchData({...searchData, pageRange: newValue});
