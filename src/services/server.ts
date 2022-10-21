@@ -7,7 +7,7 @@ export function server() {
   return createServer({
     routes() {
       this.namespace = 'api';
-      this.get('/movies', () => {
+      this.get('/follow', () => {
         return {
           movies: [
             {id: 1, name: 'Inception', year: 2010},

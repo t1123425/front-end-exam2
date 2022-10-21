@@ -10,6 +10,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+import Avatar1 from '../../assets/imgs/avatar1.png';
 function a11yProps(index: number) {
   return {
     id: `simple-tab-${index}`,
@@ -96,7 +97,11 @@ const FollowList: React.FC<followListProps> = props => {
                 sx={{justifyContent: 'space-between', padding: '8px 0'}}
               >
                 <ListItemAvatar>
-                  <Avatar alt="Follower" variant="rounded"></Avatar>
+                  <Avatar
+                    src={Avatar1}
+                    variant="rounded"
+                    alt="Follower"
+                  ></Avatar>
                 </ListItemAvatar>
                 <ListItemText
                   primary={e.fullname}

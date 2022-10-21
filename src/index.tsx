@@ -10,7 +10,7 @@ import Search from './pages/Search';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import './assets/main.scss';
-import {server} from './plugins/mirageServer';
+import {server} from './services/server';
 
 server();
 

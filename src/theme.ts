@@ -161,6 +161,16 @@ const theme = createTheme({
         },
       },
     },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: {
+          '&.blockIcon': {
+            display: 'block',
+            height: '20px',
+          },
+        },
+      },
+    },
     MuiListItemAvatar: {
       styleOverrides: {
         root: {
