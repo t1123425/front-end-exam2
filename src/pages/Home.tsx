@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import {Grid, Box, FormControl, OutlinedInput, Slider} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom'
-interface SearchData{
-  value:string,
-  pageRange:number | number[]
+import {useNavigate} from 'react-router-dom';
+interface SearchData {
+  value: string;
+  pageRange: number | number[];
 }
 
 const Home: React.FC = () => {
-  const history = useNavigate()
+  const history = useNavigate();
   const [searchData, setSearchData] = useState<SearchData>({
     value: '',
     pageRange: 30,
@@ -40,13 +40,14 @@ const Home: React.FC = () => {
       label: '50',
     },
   ];
-
-  const handleChange = (prop: keyof SearchData) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchData({...searchData, [prop]: event.target.value});
-  };
+  const handleChange =
+    (prop: keyof SearchData) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchData({...searchData, [prop]: event.target.value});
+    };
   const searchSubmit = () => {
-    history('/search')
-  }
+    history('/search');
+  };
   const searchBoxStyle = {
     paddingBottom: '30px',
     marginTop: '30px',
@@ -58,47 +59,58 @@ const Home: React.FC = () => {
     borderRight: 0,
   };
   return (
-    <Grid container
+    <Grid
+      container
       sx={{height: 1}}
       justifyContent="space-between"
-      flexDirection="column">
+      flexDirection="column"
+    >
       <Grid item>
         {/* Search block */}
         <Box sx={searchBoxStyle}>
-          <Typography variant="h1"
-          sx={{
-            fontSize: '1.5rem',
-            marginBottom: '20px'}}
-          color="primary.contrastText">
+          <Typography
+            variant="h1"
+            sx={{
+              fontSize: '1.5rem',
+              marginBottom: '20px',
+            }}
+            color="primary.contrastText"
+          >
             Search
           </Typography>
           <FormControl variant="outlined" sx={{width: 1}}>
             <OutlinedInput
               value={searchData.value}
-              onChange={
-                handleChange('value')
-              }
+              onChange={handleChange('value')}
               placeholder="Keyword"
             />
           </FormControl>
         </Box>
         {/* page range slider block*/}
         <Box sx={sliderBoxStyle}>
-          <Typography variant="h1" sx={{fontSize: '1.5rem'}} color="primary.contrastText">
+          <Typography
+            variant="h1"
+            sx={{fontSize: '1.5rem'}}
+            color="primary.contrastText"
+          >
             # of results per page
           </Typography>
-          <Box sx={{display: 'flex', alignItems: 'baseline', margin: '20px auto'}}>
-            <Typography variant="h2" sx={{fontSize: '3rem', fontWeight: 700, marginRight: '10px'}} color="primary.contrastText">
+          <Box
+            sx={{display: 'flex', alignItems: 'baseline', margin: '20px auto'}}
+          >
+            <Typography
+              variant="h2"
+              sx={{fontSize: '3rem', fontWeight: 700, marginRight: '10px'}}
+              color="primary.contrastText"
+            >
               {searchData.pageRange}
             </Typography>
-            <Typography color="primary.contrastText">
-              result
-            </Typography>
+            <Typography color="primary.contrastText">result</Typography>
           </Box>
           <Box sx={{width: 1}}>
             <Slider
               defaultValue={rangeMarks[4].value}
-              onChange={(event: Event, newValue: number | number[])=>{
+              onChange={(event: Event, newValue: number | number[]) => {
                 setSearchData({...searchData, pageRange: newValue});
               }}
               marks={rangeMarks}
@@ -108,7 +120,14 @@ const Home: React.FC = () => {
         </Box>
       </Grid>
       <Grid item sx={{paddingBottom: '90px'}}>
-        <Button className='customBtn' onClick={searchSubmit} variant="contained" sx={{maxWidth: '343px', width: 1}}>Search</Button>
+        <Button
+          className="customBtn"
+          onClick={searchSubmit}
+          variant="contained"
+          sx={{maxWidth: '343px', width: 1}}
+        >
+          Search
+        </Button>
       </Grid>
     </Grid>
   );

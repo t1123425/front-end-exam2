@@ -13,9 +13,6 @@ body{
   padding: 0;
   min-height: 900px;
 }
-.m-0{
-    margin:0;
-}
 .defaultList{ 
     list-style: none;
     padding: 0;
@@ -28,6 +25,7 @@ body{
     }
 }
 .logoStyle{
+  margin:0;
   padding:35px 21px;
   font-weight: 700;
   font-size: 13px;
