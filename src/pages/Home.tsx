@@ -5,14 +5,14 @@ import Button from '@mui/material/Button';
 import {useNavigate} from 'react-router-dom';
 interface SearchData {
   value: string;
-  pageRange: number | number[];
+  pageSize: number | number[];
 }
 
 const Home: React.FC = () => {
   const history = useNavigate();
   const [searchData, setSearchData] = useState<SearchData>({
     value: '',
-    pageRange: 30,
+    pageSize: 30,
   });
   const rangeMarks = [
     {
@@ -46,11 +46,13 @@ const Home: React.FC = () => {
       setSearchData({...searchData, [prop]: event.target.value});
     };
   const searchSubmit = () => {
-    history('/search');
+    history(
+      `/search?pageSize=${searchData.pageSize}&keyword=${searchData.value}`
+    );
   };
   const searchBoxStyle = {
     paddingBottom: '30px',
-    marginTop: '30px',
+    marginTop: '54px',
   };
   const sliderBoxStyle = {
     padding: '30px 0',
@@ -103,7 +105,7 @@ const Home: React.FC = () => {
               sx={{fontSize: '3rem', fontWeight: 700, marginRight: '10px'}}
               color="primary.contrastText"
             >
-              {searchData.pageRange}
+              {searchData.pageSize}
             </Typography>
             <Typography color="primary.contrastText">result</Typography>
           </Box>
@@ -113,7 +115,7 @@ const Home: React.FC = () => {
               max={rangeMarks[rangeMarks.length - 1].value}
               defaultValue={rangeMarks[4].value}
               onChange={(event: Event, newValue: number | number[]) => {
-                setSearchData({...searchData, pageRange: newValue});
+                setSearchData({...searchData, pageSize: newValue});
               }}
               marks={rangeMarks}
               step={null}

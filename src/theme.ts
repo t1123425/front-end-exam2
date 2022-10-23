@@ -159,6 +159,9 @@ const theme = createTheme({
         root: {
           width: '100%',
           marginTop: 0,
+          '&.tagsItem': {
+            padding: '0 0 36px 0',
+          },
         },
       },
     },

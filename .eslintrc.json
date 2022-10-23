@@ -10,6 +10,12 @@
   "rules": {
     "node/no-unpublished-import": ["error", {
       "allowModules": ["miragejs"]
-    }]
+    }],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   }
 }

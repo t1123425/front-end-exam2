@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
@@ -10,26 +10,25 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+import {
+  useGetAllDataQuery,
+  useGetFriendsQuery,
+} from '../../features/api/apiSlice';
 import Avatar1 from '../../assets/imgs/avatar1.png';
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
 interface followListProps {
   isShow?: boolean;
   width?: number | string;
 }
-interface followerData {
-  fullname: string;
+interface userData {
+  name: string;
   username: string;
   isFollowing: boolean;
+  avater: string;
 }
 interface userFollowStatus {
-  [key: string]: followerData[];
-  Followers: followerData[];
-  Following: followerData[];
+  [key: string]: userData[];
+  Followers: userData[];
+  Following: userData[];
 }
 const FollowList: React.FC<followListProps> = props => {
   const [value, setValue] = useState(0);
@@ -37,32 +36,51 @@ const FollowList: React.FC<followListProps> = props => {
   const followerMockData: userFollowStatus = {
     Followers: [
       {
-        fullname: 'test1',
+        name: 'test1',
         username: '@test1',
         isFollowing: false,
+        avater: `${Avatar1}`,
       },
       {
-        fullname: 'test2',
+        name: 'test2',
         username: '@test2',
         isFollowing: false,
+        avater: `${Avatar1}`,
       },
       {
-        fullname: 'test3',
+        name: 'test3',
         username: '@test3',
         isFollowing: false,
+        avater: `${Avatar1}`,
       },
     ],
     Following: [
       {
-        fullname: 'test4',
+        name: 'test4',
         username: '@test4',
         isFollowing: true,
+        avater: `${Avatar1}`,
       },
     ],
   };
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+  function a11yProps(index: number) {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
+    };
+  }
+  // function renderList(tabValue: number) {
+  //   const renderContent = null;
+  //   if(tab){
+
+  //   }
+  //   return renderContent;
+  // }
+  useEffect(() => {}, []);
   return (
     <Box
       sx={{
@@ -104,7 +122,7 @@ const FollowList: React.FC<followListProps> = props => {
                   ></Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  primary={e.fullname}
+                  primary={e.name}
                   secondary={
                     <Typography sx={{color: 'rgba(255,255,255,0.5)'}}>
                       {e.username}

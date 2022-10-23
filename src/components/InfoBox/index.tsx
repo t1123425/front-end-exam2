@@ -4,11 +4,12 @@ import Typography from '@mui/material/Typography';
 interface infoProps {
   title?: string;
   secondary?: string;
+  children?: JSX.Element;
 }
-const InfoBox: React.FC<infoProps> = (props, children) => {
+const InfoBox: React.FC<infoProps> = props => {
   return (
-    <Box sx={{flexGrow: 1}}>
-      {children}
+    <Box width={1}>
+      {props.children}
       <Typography variant="h2" sx={{fontSize: '14.9px'}}>
         {props.title}
       </Typography>

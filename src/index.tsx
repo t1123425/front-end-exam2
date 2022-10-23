@@ -10,17 +10,16 @@ import Search from './pages/Search';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import './assets/main.scss';
-import {server} from './services/server';
-
-server();
+import {ApiProvider} from '@reduxjs/toolkit/dist/query/react';
+import {apiSlice} from './features/api/apiSlice';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <ApiProvider api={apiSlice}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}>
@@ -31,8 +30,8 @@ root.render(
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
-    </ThemeProvider>
-  </React.StrictMode>
+    </ApiProvider>
+  </ThemeProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

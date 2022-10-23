@@ -14,9 +14,9 @@ function App() {
     padding: '0 0 0 130px',
   };
   const smMainStyle = {
-    maxWidth: 850,
+    maxWidth: 846,
     margin: '0 auto',
-    padding: '0 20px',
+    padding: '0 0',
   };
   return (
     <Box
@@ -38,11 +38,6 @@ function App() {
           <Outlet />
         </Box>
       </Box>
-      {/* <Grid sx={{height:1}} justifyContent="center" container>
-        <Grid sx={{maxWidth:BPMatches('lg')?850:725}} item>
-          <Outlet />
-        </Grid>
-      </Grid> */}
       <FollowList isShow={!lgMatch} />
     </Box>
   );
