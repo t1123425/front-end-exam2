@@ -7,7 +7,8 @@ export interface pagesData {
   data: userData[];
 }
 export interface queryResData {
-  data: tagsData[] | pagesData | undefined;
+  objData?: pagesData;
+  arrData?: tagsData[];
   isLoading: boolean;
   isSuccess: boolean;
   isError: boolean;
@@ -26,8 +27,9 @@ export interface userFriendState {
   Following: userData[];
 }
 export interface searchData {
-  keyword?: string;
-  pageSize: number;
+  keyword?: string | null;
+  page: number | null;
+  pageSize: string | null;
 }
 
 export interface tagsData {

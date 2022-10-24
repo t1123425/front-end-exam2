@@ -26,4 +26,4 @@ const InfoBox: React.FC<infoProps> = props => {
   );
 };
 
-export default InfoBox;
+export default React.memo(InfoBox);

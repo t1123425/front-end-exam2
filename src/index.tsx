@@ -10,8 +10,8 @@ import Search from './pages/Search';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import './assets/main.scss';
-import {ApiProvider} from '@reduxjs/toolkit/dist/query/react';
-import {apiSlice} from './features/api/apiSlice';
+import {Provider} from 'react-redux';
+import {store} from './features/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -19,7 +19,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <ThemeProvider theme={theme}>
     <CssBaseline />
-    <ApiProvider api={apiSlice}>
+    <Provider store={store}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}>
@@ -30,7 +30,7 @@ root.render(
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
-    </ApiProvider>
+    </Provider>
   </ThemeProvider>
 );
 

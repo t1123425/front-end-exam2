@@ -1,21 +1,22 @@
 import React from 'react';
 import {Box} from '@mui/material';
 import Typography from '@mui/material/Typography';
-import {tagsData, queryResData} from '../dataType';
+import {queryResData} from '../dataType';
 import {useGetTagsQuery} from '../features/api/apiSlice';
 import TagsBox from '../components/TagsBox';
-import Skeleton from '@mui/material/Skeleton';
+import {BoxSkeleton} from '../components/Skeleton';
+import {tagsData} from '../dataType/index';
 
 function renderTags(query: queryResData) {
   let renderContent = null;
   if (query.isLoading) {
-    renderContent = <Skeleton variant="rectangular" width={150} height={150} />;
+    renderContent = <BoxSkeleton width={150} height={150} skeletonCount={5} />;
   } else if (query.isError) {
     renderContent = <p>Error</p>;
   } else if (query.isSuccess) {
     renderContent =
-      Array.isArray(query.data) &&
-      query.data.map((e, i) => {
+      query.arrData &&
+      query.arrData.map((e, i) => {
         return (
           <TagsBox key={i} title={e.name} secondary={e.count + ' Count'} />
         );
@@ -49,7 +50,12 @@ const Tags: React.FC = () => {
           justifyContent: 'space-between',
         }}
       >
-        {renderTags({data: tags, isLoading, isSuccess, isError})}
+        {renderTags({
+          arrData: tags as tagsData[],
+          isLoading,
+          isSuccess,
+          isError,
+        })}
       </Box>
     </Box>
   );

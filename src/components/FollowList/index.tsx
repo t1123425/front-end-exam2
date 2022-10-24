@@ -1,71 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemButton from '@mui/material/ListItemButton';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import {
-  useGetAllDataQuery,
-  useGetFriendsQuery,
-} from '../../features/api/apiSlice';
-import Avatar1 from '../../assets/imgs/avatar1.png';
+import Followers from './Followers';
+import Following from './Following';
 interface followListProps {
   isShow?: boolean;
   width?: number | string;
 }
-interface userData {
-  name: string;
-  username: string;
-  isFollowing: boolean;
-  avater: string;
-}
-interface userFollowStatus {
-  [key: string]: userData[];
-  Followers: userData[];
-  Following: userData[];
-}
 const FollowList: React.FC<followListProps> = props => {
-  const [value, setValue] = useState(0);
-  const followerTabs: string[] = ['Followers', 'Following'];
-  const followerMockData: userFollowStatus = {
-    Followers: [
-      {
-        name: 'test1',
-        username: '@test1',
-        isFollowing: false,
-        avater: `${Avatar1}`,
-      },
-      {
-        name: 'test2',
-        username: '@test2',
-        isFollowing: false,
-        avater: `${Avatar1}`,
-      },
-      {
-        name: 'test3',
-        username: '@test3',
-        isFollowing: false,
-        avater: `${Avatar1}`,
-      },
-    ],
-    Following: [
-      {
-        name: 'test4',
-        username: '@test4',
-        isFollowing: true,
-        avater: `${Avatar1}`,
-      },
-    ],
-  };
-
+  const [tabsIndex, setTabsIndex] = useState(0);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+    setTabsIndex(newValue);
   };
   function a11yProps(index: number) {
     return {
@@ -73,14 +20,13 @@ const FollowList: React.FC<followListProps> = props => {
       'aria-controls': `simple-tabpanel-${index}`,
     };
   }
-  // function renderList(tabValue: number) {
-  //   const renderContent = null;
-  //   if(tab){
-
-  //   }
-  //   return renderContent;
-  // }
-  useEffect(() => {}, []);
+  function renderList() {
+    if (tabsIndex === 0) {
+      return <Followers />;
+    } else {
+      return <Following />;
+    }
+  }
   return (
     <Box
       sx={{
@@ -96,7 +42,7 @@ const FollowList: React.FC<followListProps> = props => {
     >
       <Box sx={{borderBottom: 1, borderColor: '#1F1F1F', paddingTop: '32px'}}>
         <Tabs
-          value={value}
+          value={tabsIndex}
           onChange={handleChange}
           centered
           variant="fullWidth"
@@ -107,35 +53,7 @@ const FollowList: React.FC<followListProps> = props => {
         </Tabs>
       </Box>
       <Container sx={{padding: '0 16px'}} disableGutters>
-        <List sx={{width: 1}}>
-          {followerMockData[followerTabs[value]].map((e, i) => {
-            return (
-              <ListItem
-                key={i}
-                sx={{justifyContent: 'space-between', padding: '8px 0'}}
-              >
-                <ListItemAvatar>
-                  <Avatar
-                    src={Avatar1}
-                    variant="rounded"
-                    alt="Follower"
-                  ></Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={e.name}
-                  secondary={
-                    <Typography sx={{color: 'rgba(255,255,255,0.5)'}}>
-                      {e.username}
-                    </Typography>
-                  }
-                />
-                <ListItemButton className="followBtn" selected={e.isFollowing}>
-                  {e.isFollowing ? 'Following' : 'Follow'}
-                </ListItemButton>
-              </ListItem>
-            );
-          })}
-        </List>
+        {renderList()}
       </Container>
     </Box>
   );
