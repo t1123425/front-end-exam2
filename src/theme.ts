@@ -29,9 +29,9 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '&.pageTitle': {
-            fontSize: '1.8rem',
+            display: 'flex',
+            fontSize: '1.8em',
             letterSpacing: '0.25px',
-            marginBottom: '24px',
             position: 'relative',
             '.pageBack': {
               color: '#fff',

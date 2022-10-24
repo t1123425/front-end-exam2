@@ -27,6 +27,7 @@ function App() {
         flexDirection: mdMatch ? 'column' : 'row',
         backgroundColor: 'primary.dark',
         color: 'primary.contrastText',
+        fontSize: mdMatch ? '13px' : '16px',
       }}
     >
       <NavBar mdMatch={mdMatch} />

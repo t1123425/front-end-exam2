@@ -34,7 +34,9 @@ const Tags: React.FC = () => {
   } = useGetTagsQuery(undefined);
 
   return (
-    <Box sx={{display: 'flex', flexDirection: 'column', paddingTop: '80px'}}>
+    <Box
+      sx={{display: 'flex', flexDirection: 'column', padding: '80px 24px 0'}}
+    >
       <Typography
         variant="h1"
         className="pageTitle"
@@ -47,6 +49,7 @@ const Tags: React.FC = () => {
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, 150px)',
           gridGap: '24px',
+          marginTop: '24px',
           justifyContent: 'space-between',
         }}
       >

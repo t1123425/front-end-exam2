@@ -3,6 +3,7 @@ import {Grid, Box, FormControl, OutlinedInput, Slider} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import {useNavigate} from 'react-router-dom';
+import BPMatches from '../helpers/BreakPointMatch';
 interface SearchData {
   value: string;
   pageSize: number | number[];
@@ -10,6 +11,7 @@ interface SearchData {
 
 const Home: React.FC = () => {
   const history = useNavigate();
+  const mdMatch = BPMatches('md');
   const [searchData, setSearchData] = useState<SearchData>({
     value: '',
     pageSize: 30,
@@ -63,7 +65,7 @@ const Home: React.FC = () => {
   return (
     <Grid
       container
-      sx={{height: 1}}
+      sx={{height: 1, padding: mdMatch ? '70px 20px' : 0}}
       justifyContent="space-between"
       flexDirection="column"
     >

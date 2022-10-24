@@ -1,19 +1,19 @@
 import React, {useState} from 'react';
 import {useSearchParams} from 'react-router-dom';
-import {Box} from '@mui/material';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import {Box, Typography, Button} from '@mui/material';
 import {Link} from 'react-router-dom';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import {useGetAllDataQuery} from '../features/api/apiSlice';
-import {pagesData, userData} from '../dataType';
+import {userData} from '../dataType';
 import {BoxSkeleton} from '../components/Skeleton';
 import InfoBox from '../components/InfoBox';
+import BPMatches from '../helpers/BreakPointMatch';
 
 const Search: React.FC = () => {
   const [searchParams] = useSearchParams();
   const pageSize = searchParams.get('pageSize');
   const keyword = searchParams.get('keyword');
+  const mdMatch = BPMatches('md');
   let totalPage;
   let result: userData[] = [];
   const [currentPage, setCurrentPage] = useState(1);
@@ -57,13 +57,23 @@ const Search: React.FC = () => {
     }
   }
   return (
-    <Box sx={{display: 'flex', flexDirection: 'column', paddingTop: '80px'}}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        padding: mdMatch ? '80px 24px' : '80px 0',
+      }}
+    >
       <Typography
         variant="h1"
         className="pageTitle"
         color="primary.contrastText"
       >
-        <Link to="/" className="pageBack">
+        <Link
+          to="/"
+          className="pageBack"
+          style={{display: mdMatch ? 'none' : 'inline-block'}}
+        >
           <ArrowBackIosIcon />
         </Link>
         Results
@@ -73,6 +83,7 @@ const Search: React.FC = () => {
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, 219px)',
           gridGap: '34px',
+          marginTop: '24px',
           justifyContent: 'space-between',
         }}
       >
