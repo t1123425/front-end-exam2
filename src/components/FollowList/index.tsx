@@ -33,26 +33,35 @@ const FollowList: React.FC<followListProps> = props => {
         maxWidth: 375,
         width: props.width ? props.width : 1,
         height: 1,
-        backgroundColor: 'primary.main',
-        opacity: props.isShow ? 1 : 0,
+        backgroundColor: 'primary.light',
+        visibility: props.isShow ? 'visible' : 'hidden',
         position: 'fixed',
         top: 0,
         right: 0,
       }}
     >
-      <Box sx={{borderBottom: 1, borderColor: '#1F1F1F', paddingTop: '32px'}}>
+      <Box sx={{paddingTop: '32px'}}>
         <Tabs
           value={tabsIndex}
           onChange={handleChange}
           centered
           variant="fullWidth"
           aria-label="basic tabs example"
+          sx={{
+            '.MuiTabs-indicator': {
+              backgroundColor: '#fff',
+            },
+          }}
         >
           <Tab label="Followers" {...a11yProps(0)} />
           <Tab label="Following" {...a11yProps(1)} />
         </Tabs>
       </Box>
-      <Container sx={{padding: '0 16px'}} disableGutters>
+      <Container
+        sx={{padding: '24px 16px 65px', height: 1, overflowY: 'auto'}}
+        className="invisibleScroll"
+        disableGutters
+      >
         {renderList()}
       </Container>
     </Box>

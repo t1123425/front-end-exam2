@@ -10,7 +10,7 @@ const InfoBox: React.FC<infoProps> = props => {
   return (
     <Box width={1}>
       {props.children}
-      <Typography variant="h2" sx={{fontSize: '14.9px'}}>
+      <Typography variant="h2" sx={{fontSize: '14.9px', marginBottom: '5px'}}>
         {props.title}
       </Typography>
       <Typography

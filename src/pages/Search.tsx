@@ -8,7 +8,13 @@ import {userData} from '../dataType';
 import {BoxSkeleton} from '../components/Skeleton';
 import InfoBox from '../components/InfoBox';
 import BPMatches from '../helpers/BreakPointMatch';
-
+import ImgCard from '../components/ImgCard';
+import FallBackImage from '../assets/imgs/image1.png';
+/**
+ * Result page:
+ * when enter this page will get URL parameter (keyword & pageSize)
+ * then call api query useGetAllDataQuery
+ */
 const Search: React.FC = () => {
   const [searchParams] = useSearchParams();
   const pageSize = searchParams.get('pageSize');
@@ -41,10 +47,11 @@ const Search: React.FC = () => {
         return (
           <Box key={i}>
             <InfoBox title={e.name} secondary={'By ' + e.username}>
-              <img
+              <ImgCard
                 style={{width: '100%', marginBottom: '12px'}}
                 src={e.avatar}
                 alt={e.name}
+                fallback={FallBackImage}
               />
             </InfoBox>
           </Box>
@@ -61,7 +68,7 @@ const Search: React.FC = () => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        padding: mdMatch ? '80px 24px' : '80px 0',
+        padding: mdMatch ? '90px 24px' : '92px 0',
       }}
     >
       <Typography
@@ -74,21 +81,24 @@ const Search: React.FC = () => {
           className="pageBack"
           style={{display: mdMatch ? 'none' : 'inline-block'}}
         >
-          <ArrowBackIosIcon />
+          <ArrowBackIosIcon sx={{fontSize: '1.6rem'}} />
         </Link>
         Results
       </Typography>
       <Box
         sx={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, 219px)',
-          gridGap: '34px',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(219px,1fr))',
+          columnGap: '34px',
+          rowGap: '21px',
           marginTop: '24px',
           justifyContent: 'space-between',
         }}
       >
+        {/* render search result */}
         {renderContent}
       </Box>
+      {/* 'More' Bottom will show up when there need to load next page data */}
       {currentPage !== totalPage && result.length > 0 ? (
         <Button
           className="customBtn"

@@ -44,4 +44,4 @@ const TagsBox: React.FC<infoBoxProps> = props => {
   );
 };
 
-export default TagsBox;
+export default React.memo(TagsBox);

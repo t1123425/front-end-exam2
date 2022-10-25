@@ -18,6 +18,11 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.4); 
 }
+.invisibleScroll{
+  &::-webkit-scrollbar{
+    width: 0;
+  }
+}
 html{
   height:100%;
 }

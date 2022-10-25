@@ -4,14 +4,13 @@ import UserList from './UserList';
 
 const Followers: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = '10';
   const {
     data: pages,
     isLoading,
     isSuccess,
     isError,
     isFetching,
-  } = useGetAllDataQuery({page: currentPage, pageSize: '10'});
+  } = useGetAllDataQuery({page: currentPage, pageSize: '14'});
   return (
     <UserList
       isLoading={isLoading}

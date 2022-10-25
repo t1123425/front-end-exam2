@@ -50,12 +50,31 @@ const NavBar: React.FC<navProp> = props => {
           Home Page
         </Typography>
       ) : (
-        <h1 className="logoStyle">LOGO</h1>
+        <h1
+          style={{
+            display: props.mdMatch ? 'block' : 'none',
+            padding: '27.5px 0',
+          }}
+          className="logoStyle"
+        >
+          LOGO
+        </h1>
       )}
       <Drawer
         anchor={props.mdMatch ? 'bottom' : 'left'}
         variant="permanent"
-        sx={{'& .MuiPaper-root': {backgroundColor: 'primary.main'}}}
+        sx={{
+          '& .MuiPaper-root': {
+            backgroundColor: props.mdMatch
+              ? 'rgba(24, 24, 24, 0.2)'
+              : 'primary.light',
+            boxShadow: props.mdMatch
+              ? 'inset 0px 0.5px 0px rgba(0, 0, 0, 0.8)'
+              : 'none',
+            backdropFilter: props.mdMatch ? 'blur(27.1828px)' : 'none',
+            maxWidth: props.mdMatch ? 1 : 80,
+          },
+        }}
         open
       >
         <h1
@@ -64,10 +83,7 @@ const NavBar: React.FC<navProp> = props => {
         >
           LOGO
         </h1>
-        <LinksList
-          listDirect={props.mdMatch ? 'row' : 'column'}
-          links={linksData}
-        />
+        <LinksList mdMatch={props.mdMatch} links={linksData} />
       </Drawer>
     </Box>
   );

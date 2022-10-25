@@ -36,9 +36,9 @@ const theme = createTheme({
             '.pageBack': {
               color: '#fff',
               position: 'absolute',
-              bottom: '0',
+              top: '2px',
               margin: 'auto',
-              left: '-30px',
+              left: '-35px',
             },
           },
         },
@@ -121,6 +121,8 @@ const theme = createTheme({
             borderRadius: '20px',
             minWidth: '60px',
             fontSize: '12px',
+            fontWeight: '600',
+            padding: '4.5px 10px',
             border: '1px solid #fff',
             backgroundColor: '#121212',
             color: '#fff',
@@ -141,15 +143,25 @@ const theme = createTheme({
         },
       },
     },
+    MuiTabs: {
+      styleOverrides: {
+        root: {
+          minHeight: 'auto',
+        },
+      },
+    },
     MuiTab: {
       styleOverrides: {
         root: {
           color: '#929292',
           textTransform: 'none',
           fontSize: '1rem',
+          borderBottom: '2px solid #1F1F1F',
+          height: '33px',
+          minHeight: 'auto',
+          padding: '0 16px 13px',
           '&.Mui-selected': {
             color: '#fff',
-            borderBottom: '4px solid #fff',
           },
         },
       },

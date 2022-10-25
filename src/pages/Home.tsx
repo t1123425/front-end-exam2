@@ -4,14 +4,23 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import {useNavigate} from 'react-router-dom';
 import BPMatches from '../helpers/BreakPointMatch';
+
 interface SearchData {
   value: string;
   pageSize: number | number[];
 }
 
+/**
+ * Home page:
+ * Users can fill in keywords in the search bar and
+ * switch the page size of the slide bar and
+ * click the button to search.
+ */
+
 const Home: React.FC = () => {
   const history = useNavigate();
   const mdMatch = BPMatches('md');
+  // Default search data
   const [searchData, setSearchData] = useState<SearchData>({
     value: '',
     pageSize: 30,
@@ -90,7 +99,7 @@ const Home: React.FC = () => {
             />
           </FormControl>
         </Box>
-        {/* page range slider block*/}
+        {/* page Size slider block*/}
         <Box sx={sliderBoxStyle}>
           <Typography
             variant="h1"

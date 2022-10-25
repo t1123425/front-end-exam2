@@ -22,7 +22,7 @@ const UserList: React.FC<useListProp> = props => {
       console.log('data', props.objData);
     }
     return (
-      <List sx={{width: 1}}>
+      <List sx={{width: 1, padding: 0}}>
         {props.isSuccess && props.objData?.data
           ? props.objData.data.map((e, i) => {
               return (
@@ -38,10 +38,13 @@ const UserList: React.FC<useListProp> = props => {
                     ></Avatar>
                   </ListItemAvatar>
                   <ListItemText
+                    sx={{margin: '0 auto'}}
                     primary={e.name}
                     secondary={
-                      <Typography sx={{color: 'rgba(255,255,255,0.5)'}}>
-                        {e.username}
+                      <Typography
+                        sx={{color: 'rgba(255,255,255,0.5)', fontSize: 14}}
+                      >
+                        {'@' + e.username}
                       </Typography>
                     }
                   />

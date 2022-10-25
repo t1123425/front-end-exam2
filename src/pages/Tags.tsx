@@ -6,25 +6,15 @@ import {useGetTagsQuery} from '../features/api/apiSlice';
 import TagsBox from '../components/TagsBox';
 import {BoxSkeleton} from '../components/Skeleton';
 import {tagsData} from '../dataType/index';
+import BPMatches from '../helpers/BreakPointMatch';
+/**
+ * Tags page:
+ * when enter this page will call api query useGetTagsQuery
+ * then render the tagsBox
+ */
 
-function renderTags(query: queryResData) {
-  let renderContent = null;
-  if (query.isLoading) {
-    renderContent = <BoxSkeleton width={150} height={150} skeletonCount={5} />;
-  } else if (query.isError) {
-    renderContent = <p>Error</p>;
-  } else if (query.isSuccess) {
-    renderContent =
-      query.arrData &&
-      query.arrData.map((e, i) => {
-        return (
-          <TagsBox key={i} title={e.name} secondary={e.count + ' Count'} />
-        );
-      });
-  }
-  return renderContent;
-}
 const Tags: React.FC = () => {
+  const mdMatch = BPMatches('md');
   const {
     data: tags,
     isLoading,
@@ -33,9 +23,32 @@ const Tags: React.FC = () => {
     error,
   } = useGetTagsQuery(undefined);
 
+  function renderTags(query: queryResData) {
+    let renderContent = null;
+    if (query.isLoading) {
+      renderContent = (
+        <BoxSkeleton width={150} height={150} skeletonCount={5} />
+      );
+    } else if (query.isError) {
+      renderContent = <p>Error</p>;
+    } else if (query.isSuccess) {
+      renderContent =
+        query.arrData &&
+        query.arrData.map((e, i) => {
+          return (
+            <TagsBox key={i} title={e.name} secondary={e.count + ' Count'} />
+          );
+        });
+    }
+    return renderContent;
+  }
   return (
     <Box
-      sx={{display: 'flex', flexDirection: 'column', padding: '80px 24px 0'}}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        padding: mdMatch ? '90px 24px' : '80px 0',
+      }}
     >
       <Typography
         variant="h1"

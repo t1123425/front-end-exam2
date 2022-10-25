@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+import {NavLink, useLocation} from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -11,17 +11,20 @@ interface LinksData {
 }
 interface ListProps {
   links?: LinksData[];
-  listDirect?: string;
+  mdMatch?: boolean;
 }
 const LinksList: React.FC<ListProps> = props => {
+  const location = useLocation();
   const linkStyles = {
     flexDirection: 'column',
     textAlign: 'center',
     fontSize: '12px',
     color: '#8A8A8F',
     fill: '#8A8A8F',
+    padding: props.mdMatch ? '2px 25px 1px' : '8px 16px',
+    maxWidth: props.mdMatch ? '24px' : 'auto',
     margin: 0,
-    '&[aria-current="page"]': {
+    '&.active': {
       color: '#fff',
       fill: '#fff',
     },
@@ -30,7 +33,8 @@ const LinksList: React.FC<ListProps> = props => {
     <List
       sx={{
         display: 'flex',
-        flexDirection: props.listDirect ? props.listDirect : 'column',
+        flexDirection: props.mdMatch ? 'row' : 'column',
+        justifyContent: props.mdMatch ? 'center' : 'flex-start',
       }}
     >
       {props.links &&
@@ -42,7 +46,12 @@ const LinksList: React.FC<ListProps> = props => {
               end={e.name === 'Home'}
               sx={linkStyles}
               to={e.path}
-              className="column"
+              className={
+                'column ' +
+                (location.pathname === '/search' && e.name === 'Home'
+                  ? 'active'
+                  : '')
+              }
             >
               <ListItemIcon className="blockIcon">
                 <MySvg />

@@ -1,10 +1,12 @@
 import React from 'react';
 import NavBar from './components/NavBar';
-import {Outlet} from 'react-router-dom';
+import {Outlet, useLocation} from 'react-router-dom';
 import Box from '@mui/material/Box';
 import FollowList from './components/FollowList';
 import BPMatches from './helpers/BreakPointMatch';
-function App() {
+
+const App: React.FC = () => {
+  const location = useLocation();
   const lgMatch = BPMatches('lg');
   const mdMatch = BPMatches('md');
   // 505px is space  with followList & router page content
@@ -18,6 +20,13 @@ function App() {
     margin: '0 auto',
     padding: '0 0',
   };
+  function renderWrapStyle() {
+    if (location.pathname !== '/tags') {
+      return lgMatch ? smMainStyle : lgMainStyle;
+    } else {
+      return smMainStyle;
+    }
+  }
   return (
     <Box
       sx={{
@@ -32,16 +41,13 @@ function App() {
     >
       <NavBar mdMatch={mdMatch} />
       <Box component="main" sx={{flexGrow: 1}}>
-        <Box
-          component="section"
-          sx={{height: 1, ...(lgMatch ? smMainStyle : lgMainStyle)}}
-        >
+        <Box component="section" sx={{height: 1, ...renderWrapStyle()}}>
           <Outlet />
         </Box>
       </Box>
-      <FollowList isShow={!lgMatch} />
+      {location.pathname !== '/tags' && <FollowList isShow={!lgMatch} />}
     </Box>
   );
-}
+};
 
 export default App;
