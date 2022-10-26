@@ -116,7 +116,7 @@ const Home: React.FC = () => {
             sx={{fontSize: '1.5rem'}}
             color="primary.contrastText"
           >
-            # of results per page
+            # Of Results Per Page
           </Typography>
           <Box
             sx={{

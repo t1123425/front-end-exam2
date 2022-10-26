@@ -21,7 +21,7 @@ const LinksList: React.FC<ListProps> = props => {
     fontSize: '12px',
     color: '#8A8A8F',
     fill: '#8A8A8F',
-    padding: props.mdMatch ? '2px 25px 1px' : '8px 16px',
+    padding: props.mdMatch ? '2px 50px 1px' : '8px 16px',
     maxWidth: props.mdMatch ? '24px' : 'auto',
     margin: 0,
     '&.active': {
