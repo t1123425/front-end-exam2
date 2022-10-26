@@ -20,12 +20,12 @@ root.render(
   <ThemeProvider theme={theme}>
     <CssBaseline />
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename="/front-end-exam2">
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Home />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/tags" element={<Tags />} />
+            <Route path="search" element={<Search />} />
+            <Route path="tags" element={<Tags />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
