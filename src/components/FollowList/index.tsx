@@ -1,16 +1,24 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Followers from './Followers';
 import Following from './Following';
+import {useBottomScrollListener} from 'react-bottom-scroll-listener';
+import {callChildFunction} from '../../dataType';
 interface followListProps {
   isShow?: boolean;
   width?: number | string;
 }
 const FollowList: React.FC<followListProps> = props => {
   const [tabsIndex, setTabsIndex] = useState(0);
+  const FollowersRef = useRef<callChildFunction>(null);
+  const scrollRef = useBottomScrollListener<HTMLDivElement>(() => {
+    console.log('at bottom');
+    //FollowersRef.current?.updatepage();
+  });
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabsIndex(newValue);
   };
@@ -22,7 +30,7 @@ const FollowList: React.FC<followListProps> = props => {
   }
   function renderList() {
     if (tabsIndex === 0) {
-      return <Followers />;
+      return <Followers ref={FollowersRef} />;
     } else {
       return <Following />;
     }
@@ -61,6 +69,7 @@ const FollowList: React.FC<followListProps> = props => {
         sx={{padding: '24px 16px 65px', height: 1, overflowY: 'auto'}}
         className="invisibleScroll"
         disableGutters
+        ref={scrollRef}
       >
         {renderList()}
       </Container>

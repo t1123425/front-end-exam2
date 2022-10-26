@@ -10,13 +10,20 @@ import {queryResData} from '../../dataType/index';
 import {ListSkeleton} from '../Skeleton';
 interface useListProp extends queryResData {
   parentfunction?: () => void;
+  hasNextData: boolean;
 }
 
 const UserList: React.FC<useListProp> = props => {
+  if (props.isError)
+    return (
+      <List sx={{width: 1, padding: 0}}>
+        <ListItem>
+          <p>Error</p>
+        </ListItem>
+      </List>
+    );
   if (props.isLoading) {
-    return <ListSkeleton skeletonCount={3}></ListSkeleton>;
-  } else if (props.isError) {
-    return <p>Error</p>;
+    return <ListSkeleton skeletonCount={6}></ListSkeleton>;
   } else {
     if (props.isSuccess) {
       console.log('data', props.objData);

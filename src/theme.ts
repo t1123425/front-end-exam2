@@ -67,10 +67,7 @@ const theme = createTheme({
         },
         markLabel: {
           color: 'rgba(255,255,255,0.5)',
-          top: '38px',
-          '&.MuiSlider-markLabelActive': {
-            color: '#fff',
-          },
+          top: '45px!important',
         },
       },
     },

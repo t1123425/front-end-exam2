@@ -1,11 +1,11 @@
 import React from 'react';
 import {Box} from '@mui/material';
 import Typography from '@mui/material/Typography';
-import {queryResData} from '../dataType';
 import {useGetTagsQuery} from '../features/api/apiSlice';
 import TagsBox from '../components/TagsBox';
 import {BoxSkeleton} from '../components/Skeleton';
 import {tagsData} from '../dataType/index';
+import ErrorBlock from '../components/ErrorBlock';
 import BPMatches from '../helpers/BreakPointMatch';
 /**
  * Tags page:
@@ -20,28 +20,10 @@ const Tags: React.FC = () => {
     isLoading,
     isSuccess,
     isError,
-    error,
   } = useGetTagsQuery(undefined);
 
-  function renderTags(query: queryResData) {
-    let renderContent = null;
-    if (query.isLoading) {
-      renderContent = (
-        <BoxSkeleton width={150} height={150} skeletonCount={5} />
-      );
-    } else if (query.isError) {
-      renderContent = <p>Error</p>;
-    } else if (query.isSuccess) {
-      renderContent =
-        query.arrData &&
-        query.arrData.map((e, i) => {
-          return (
-            <TagsBox key={i} title={e.name} secondary={e.count + ' Count'} />
-          );
-        });
-    }
-    return renderContent;
-  }
+  // SHOW ERROR BLOCK
+  if (isError) return <ErrorBlock message="Error something wrong~" />;
   return (
     <Box
       sx={{
@@ -57,22 +39,53 @@ const Tags: React.FC = () => {
       >
         Tags
       </Typography>
-      <Box
-        sx={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, 150px)',
-          gridGap: '24px',
-          marginTop: '24px',
-          justifyContent: 'space-between',
-        }}
-      >
-        {renderTags({
-          arrData: tags as tagsData[],
-          isLoading,
-          isSuccess,
-          isError,
-        })}
-      </Box>
+      {isLoading && (
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, 150px)',
+            gridGap: '24px',
+            marginTop: '24px',
+            justifyContent: 'space-between',
+          }}
+        >
+          <BoxSkeleton width={150} height={150} skeletonCount={5} />
+        </Box>
+      )}
+      {/* render sucess */}
+      {isSuccess && (
+        <>
+          {tags.length > 0 ? (
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, 150px)',
+                gridGap: '24px',
+                marginTop: '24px',
+                justifyContent: 'space-between',
+              }}
+            >
+              {tags.map((e, i) => {
+                return (
+                  <TagsBox
+                    key={i}
+                    title={e.name}
+                    secondary={e.count + ' Count'}
+                  />
+                );
+              })}
+            </Box>
+          ) : (
+            <Typography
+              variant="h4"
+              gutterBottom
+              sx={{margin: '20px auto', textAlign: 'center', fontWeight: 600}}
+            >
+              There is no tags data.
+            </Typography>
+          )}
+        </>
+      )}
     </Box>
   );
 };

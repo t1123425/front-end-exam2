@@ -6,6 +6,9 @@ export interface pagesData {
   pageSize: number;
   data: userData[];
 }
+export interface callChildFunction {
+  updatepage(): void;
+}
 export interface queryResData {
   objData?: pagesData;
   arrData?: tagsData[];
@@ -29,7 +32,7 @@ export interface userFriendState {
 export interface searchData {
   keyword?: string | null;
   page: number | null;
-  pageSize: string | null;
+  pageSize: number | null;
 }
 
 export interface tagsData {

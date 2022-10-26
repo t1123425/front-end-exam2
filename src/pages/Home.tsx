@@ -27,28 +27,34 @@ const Home: React.FC = () => {
   });
   const rangeMarks = [
     {
-      value: 6,
+      value: 0,
       label: '3',
+      pageSize: 6,
     },
     {
-      value: 12,
+      value: 20,
       label: '6',
+      pageSize: 12,
     },
     {
-      value: 18,
+      value: 40,
       label: '9',
+      pageSize: 18,
     },
     {
-      value: 24,
+      value: 60,
       label: '12',
+      pageSize: 24,
     },
     {
-      value: 30,
+      value: 80,
       label: '15',
+      pageSize: 30,
     },
     {
-      value: 100,
+      value: 110,
       label: '50',
+      pageSize: 100,
     },
   ];
   const handleChange =
@@ -62,20 +68,24 @@ const Home: React.FC = () => {
     );
   };
   const searchBoxStyle = {
-    paddingBottom: '30px',
-    marginTop: '54px',
+    paddingBottom: mdMatch ? 0 : '30px',
+    marginTop: mdMatch ? 0 : '54px',
   };
   const sliderBoxStyle = {
-    padding: '30px 0',
-    border: '1px solid rgba(255,255,255,0.1)',
-    borderLeft: 0,
-    borderRight: 0,
+    padding: mdMatch ? '28px 0 218px' : '30px 0 45px',
+    borderTop: mdMatch ? 0 : '1px solid rgba(255,255,255,0.1)',
+    borderBottom: '1px solid rgba(255,255,255,0.1)',
+    marginBottom: mdMatch ? '80px' : 0,
   };
+  function renderLabelActive() {
+    const index = rangeMarks.findIndex(e => e.pageSize === searchData.pageSize);
+    return index;
+  }
   return (
     <Grid
       container
       sx={{height: 1, padding: mdMatch ? '70px 20px' : 0}}
-      justifyContent="space-between"
+      justifyContent={mdMatch ? 'flex-start' : 'space-between'}
       flexDirection="column"
     >
       <Grid item>
@@ -85,7 +95,7 @@ const Home: React.FC = () => {
             variant="h1"
             sx={{
               fontSize: '1.5rem',
-              marginBottom: '20px',
+              marginBottom: mdMatch ? '16px' : '20px',
             }}
             color="primary.contrastText"
           >
@@ -109,7 +119,11 @@ const Home: React.FC = () => {
             # of results per page
           </Typography>
           <Box
-            sx={{display: 'flex', alignItems: 'baseline', margin: '20px auto'}}
+            sx={{
+              display: 'flex',
+              alignItems: 'baseline',
+              margin: mdMatch ? '16px auto 0' : '20px auto',
+            }}
           >
             <Typography
               variant="h2"
@@ -121,12 +135,29 @@ const Home: React.FC = () => {
             <Typography color="primary.contrastText">result</Typography>
           </Box>
           <Box sx={{width: 1}}>
+            {/* pageSize slider */}
             <Slider
               min={rangeMarks[0].value}
               max={rangeMarks[rangeMarks.length - 1].value}
               defaultValue={rangeMarks[4].value}
               onChange={(event: Event, newValue: number | number[]) => {
-                setSearchData({...searchData, pageSize: newValue});
+                const selectedRange = rangeMarks.find(
+                  e => e.value === newValue
+                );
+                //console.log('selectedRange', selectedRange);
+                setSearchData({
+                  ...searchData,
+                  pageSize: selectedRange?.pageSize
+                    ? selectedRange.pageSize
+                    : 0,
+                });
+              }}
+              sx={{
+                marginBottom: 0,
+                [`.MuiSlider-markLabelActive[data-index="${renderLabelActive()}"]`]:
+                  {
+                    color: '#fff',
+                  },
               }}
               marks={rangeMarks}
               step={null}
