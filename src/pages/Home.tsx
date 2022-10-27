@@ -165,7 +165,10 @@ const Home: React.FC = () => {
           </Box>
         </Box>
       </Grid>
-      <Grid item sx={{paddingBottom: '90px'}}>
+      <Grid
+        item
+        sx={{paddingBottom: '90px', textAlign: mdMatch ? 'center' : 'left'}}
+      >
         <Button
           className="customBtn"
           onClick={searchSubmit}

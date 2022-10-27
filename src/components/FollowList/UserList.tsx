@@ -6,11 +6,11 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import {QueryResData} from '../../dataType/index';
+import {QueryResData, UserData} from '../../dataType/index';
 import {ListSkeleton} from '../Skeleton';
 interface useListProp extends QueryResData {
-  parentfunction?: () => void;
-  hasNextData: boolean;
+  hasNextData?: boolean;
+  listData?: UserData[];
 }
 
 const UserList: React.FC<useListProp> = props => {
@@ -25,13 +25,13 @@ const UserList: React.FC<useListProp> = props => {
   if (props.isLoading) {
     return <ListSkeleton skeletonCount={6}></ListSkeleton>;
   } else {
-    if (props.isSuccess) {
-      console.log('data', props.objData);
-    }
+    // if (props.isSuccess) {
+    //   console.log('data', props.objData);
+    // }
     return (
       <List sx={{width: 1, padding: 0}}>
-        {props.isSuccess && props.objData?.data
-          ? props.objData.data.map((e, i) => {
+        {props.isSuccess && props.listData
+          ? props.listData.map((e, i) => {
               return (
                 <ListItem
                   key={i}

@@ -1,22 +1,25 @@
 import React, {useRef, forwardRef, useImperativeHandle} from 'react';
 import {useGetAllDataQuery} from '../../features/api/apiSlice';
 import UserList from './UserList';
-import {CallChildFunction} from '../../dataType';
+import {CallChildFunction, UserData} from '../../dataType';
 
 const Followers = forwardRef<CallChildFunction, {}>((props, ref) => {
   useImperativeHandle(ref, () => ({
     updatepage() {
       //console.log('from parent');
-      // setCurrentPage(currentPage => currentPage + 1);
-      currentPage.current += 1;
-      console.log('current', currentPage.current);
-      refetch();
+      // console.log('current', currentPage.current);
+      if (hasNextRef.current) {
+        currentPage.current += 1;
+        updateStatus.current = true;
+        //console.log('current', currentPage.current);
+        refetch();
+      }
     },
   }));
-
+  const updateStatus = useRef(true);
   const currentPage = useRef(1);
   const hasNextRef = useRef(true);
-
+  const resultLists = useRef<UserData[]>([]);
   const {
     data: pages,
     isLoading,
@@ -24,17 +27,33 @@ const Followers = forwardRef<CallChildFunction, {}>((props, ref) => {
     isError,
     refetch,
   } = useGetAllDataQuery({page: currentPage.current, pageSize: 14});
-  if (pages?.page === pages?.totalPages) {
-    hasNextRef.current = false;
-  }
 
+  function renderLists(
+    successStatus: boolean,
+    isUpdate: boolean,
+    hasNext: boolean,
+    updateData: UserData[]
+  ) {
+    if (successStatus && isUpdate && hasNext) {
+      resultLists.current = [...resultLists.current, ...updateData];
+      updateStatus.current = false;
+      if (currentPage.current === pages?.totalPages) {
+        hasNextRef.current = false;
+      }
+    }
+  }
+  renderLists(
+    isSuccess,
+    updateStatus.current,
+    hasNextRef.current,
+    pages?.data ? pages?.data : []
+  );
   return (
     <UserList
       isLoading={isLoading}
       isSuccess={isSuccess}
       isError={isError}
-      objData={pages}
-      hasNextData={hasNextRef.current}
+      listData={resultLists.current}
     />
   );
 });

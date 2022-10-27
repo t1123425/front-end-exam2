@@ -1,31 +1,29 @@
-import React, {useState, useRef} from 'react';
+import React, {useRef} from 'react';
 import {useGetFriendsQuery} from '../../features/api/apiSlice';
 import UserList from './UserList';
+import {UserData} from '../../dataType';
 
 const Following: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const hasNextRef = useRef(true);
   const pageSize = 10;
+  const resultLists = useRef<UserData[]>([]);
   const {
     data: pages,
     isLoading,
     isSuccess,
     isError,
-  } = useGetFriendsQuery({page: currentPage, pageSize: pageSize});
-  if (pages?.page === pages?.totalPages) {
-    hasNextRef.current = false;
+  } = useGetFriendsQuery({page: 1, pageSize: pageSize});
+  function renderLists(successStatus: boolean, updateData: UserData[]) {
+    if (successStatus) {
+      resultLists.current = [...resultLists.current, ...updateData];
+    }
   }
-  function goNextPage() {
-    setCurrentPage(currentPage => currentPage + 1);
-  }
+  renderLists(isSuccess, pages?.data ? pages?.data : []);
   return (
     <UserList
       isLoading={isLoading}
       isSuccess={isSuccess}
       isError={isError}
-      objData={pages}
-      hasNextData={hasNextRef.current}
-      parentfunction={goNextPage}
+      listData={resultLists.current}
     />
   );
 };

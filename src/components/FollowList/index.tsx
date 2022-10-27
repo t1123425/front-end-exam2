@@ -15,8 +15,8 @@ const FollowList: React.FC<followListProps> = props => {
   const [tabsIndex, setTabsIndex] = useState(0);
   const FollowersRef = useRef<CallChildFunction>(null);
   const scrollRef = useBottomScrollListener<HTMLDivElement>(() => {
-    console.log('at bottom');
-    //FollowersRef.current?.updatepage();
+    //console.log('at bottom');
+    FollowersRef.current?.updatepage();
   });
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {

@@ -10,6 +10,7 @@ import BPMatches from '../helpers/BreakPointMatch';
 import ImgCard from '../components/ImgCard';
 import FallBackImage from '../assets/imgs/image1.png';
 import ErrorBlock from '../components/ErrorBlock';
+import {UserData} from '../dataType';
 /**
  * Result page:
  * when enter this page will get URL parameter (keyword & pageSize)
@@ -20,9 +21,9 @@ const Search: React.FC = () => {
   const pageSize = searchParams.get('pageSize');
   const keyword = searchParams.get('keyword');
   const mdMatch = BPMatches('md');
-  // const updateStatus = useRef(false);
+  const updateStatus = useRef(true);
   const [currentPage, setCurrentPage] = useState(1);
-  // const renderResult = useRef<UserData[]>([]);
+  const renderResult = useRef<UserData[]>([]);
   const {
     data: pages,
     isLoading,
@@ -35,6 +36,21 @@ const Search: React.FC = () => {
     keyword,
   });
 
+  function RenderResults(
+    successStatus: boolean,
+    isUpdate: boolean,
+    updateData: UserData[]
+  ) {
+    if (successStatus && isUpdate) {
+      renderResult.current = [...renderResult.current, ...updateData];
+      updateStatus.current = false;
+    }
+  }
+  RenderResults(
+    isSuccess,
+    updateStatus.current,
+    pages?.data ? pages?.data : []
+  );
   // SHOW ERROR BLOCK
   if (isError) return <ErrorBlock message="Error something wrong~" />;
 
@@ -81,7 +97,7 @@ const Search: React.FC = () => {
       {/* render sucess */}
       {isSuccess && (
         <>
-          {pages.data.length > 0 ? (
+          {renderResult.current.length > 0 ? (
             <>
               <Box
                 sx={{
@@ -92,7 +108,7 @@ const Search: React.FC = () => {
                   justifyContent: 'space-between',
                 }}
               >
-                {pages.data.map((e, i) => {
+                {renderResult.current.map((e, i) => {
                   return (
                     <Box key={i}>
                       <InfoBox title={e.name} secondary={'By ' + e.username}>
@@ -108,13 +124,13 @@ const Search: React.FC = () => {
                 })}
               </Box>
               {/* 'More' Bottom will show up when there need to load next page data */}
-              {currentPage !== pages.totalPages && pages.data.length > 0 ? (
+              {currentPage !== pages.totalPages &&
+              renderResult.current.length > 0 ? (
                 <Button
                   className="customBtn"
                   onClick={() => {
-                    // currentPage.current += 1;
                     setCurrentPage(currentPage => currentPage + 1);
-                    // setRenderResult(result => [...result, ...pages.data]);
+                    updateStatus.current = true;
                   }}
                   disabled={isFetching}
                   variant="contained"
