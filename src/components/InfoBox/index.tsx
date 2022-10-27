@@ -1,12 +1,9 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-interface infoProps {
-  title?: string;
-  secondary?: string;
-  children?: JSX.Element;
-}
-const InfoBox: React.FC<infoProps> = props => {
+import {InfoBoxProps} from '../../dataType/index';
+
+const InfoBox: React.FC<InfoBoxProps> = props => {
   return (
     <Box width={1}>
       {props.children}

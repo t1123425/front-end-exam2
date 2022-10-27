@@ -4,7 +4,6 @@ import Typography from '@mui/material/Typography';
 import {useGetTagsQuery} from '../features/api/apiSlice';
 import TagsBox from '../components/TagsBox';
 import {BoxSkeleton} from '../components/Skeleton';
-import {tagsData} from '../dataType/index';
 import ErrorBlock from '../components/ErrorBlock';
 import BPMatches from '../helpers/BreakPointMatch';
 /**

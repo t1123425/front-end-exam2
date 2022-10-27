@@ -2,8 +2,9 @@ import React from 'react';
 import {Box} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import InfoBox from '../InfoBox';
-import {infoBoxProps} from '../../dataType';
-const TagsBox: React.FC<infoBoxProps> = props => {
+import {InfoBoxProps} from '../../dataType';
+
+const TagsBox: React.FC<InfoBoxProps> = props => {
   return (
     <Box className="tagsItem">
       <InfoBox title={props.title} secondary={props.secondary}>

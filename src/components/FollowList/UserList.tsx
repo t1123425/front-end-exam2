@@ -6,9 +6,9 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import {queryResData} from '../../dataType/index';
+import {QueryResData} from '../../dataType/index';
 import {ListSkeleton} from '../Skeleton';
-interface useListProp extends queryResData {
+interface useListProp extends QueryResData {
   parentfunction?: () => void;
   hasNextData: boolean;
 }

@@ -20,9 +20,9 @@ const Search: React.FC = () => {
   const pageSize = searchParams.get('pageSize');
   const keyword = searchParams.get('keyword');
   const mdMatch = BPMatches('md');
-  //const currentPage = useRef(1);
+  // const updateStatus = useRef(false);
   const [currentPage, setCurrentPage] = useState(1);
-  // const renderResult = useRef<userData[]>([]);
+  // const renderResult = useRef<UserData[]>([]);
   const {
     data: pages,
     isLoading,

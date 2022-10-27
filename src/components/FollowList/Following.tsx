@@ -11,7 +11,6 @@ const Following: React.FC = () => {
     isLoading,
     isSuccess,
     isError,
-    isFetching,
   } = useGetFriendsQuery({page: currentPage, pageSize: pageSize});
   if (pages?.page === pages?.totalPages) {
     hasNextRef.current = false;

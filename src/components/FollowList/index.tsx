@@ -6,14 +6,14 @@ import Container from '@mui/material/Container';
 import Followers from './Followers';
 import Following from './Following';
 import {useBottomScrollListener} from 'react-bottom-scroll-listener';
-import {callChildFunction} from '../../dataType';
+import {CallChildFunction} from '../../dataType';
 interface followListProps {
   isShow?: boolean;
   width?: number | string;
 }
 const FollowList: React.FC<followListProps> = props => {
   const [tabsIndex, setTabsIndex] = useState(0);
-  const FollowersRef = useRef<callChildFunction>(null);
+  const FollowersRef = useRef<CallChildFunction>(null);
   const scrollRef = useBottomScrollListener<HTMLDivElement>(() => {
     console.log('at bottom');
     //FollowersRef.current?.updatepage();

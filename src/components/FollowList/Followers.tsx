@@ -1,9 +1,9 @@
-import React, {useState, useRef, forwardRef, useImperativeHandle} from 'react';
+import React, {useRef, forwardRef, useImperativeHandle} from 'react';
 import {useGetAllDataQuery} from '../../features/api/apiSlice';
 import UserList from './UserList';
-import {callChildFunction} from '../../dataType';
+import {CallChildFunction} from '../../dataType';
 
-const Followers = forwardRef<callChildFunction, {}>((props, ref) => {
+const Followers = forwardRef<CallChildFunction, {}>((props, ref) => {
   useImperativeHandle(ref, () => ({
     updatepage() {
       //console.log('from parent');

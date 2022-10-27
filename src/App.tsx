@@ -31,7 +31,7 @@ const App: React.FC = () => {
     <Box
       sx={{
         display: 'flex',
-        flexWrap: 'wrap',
+        flexWrap: 'nowrap',
         width: 1,
         flexDirection: mdMatch ? 'column' : 'row',
         backgroundColor: 'primary.dark',

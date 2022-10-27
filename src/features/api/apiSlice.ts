@@ -1,23 +1,23 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {pagesData, searchData, tagsData} from '../../dataType';
+import {PagesData, QuerySearchData, TagsData} from '../../dataType';
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({baseUrl: process.env.REACT_APP_API_URL}),
   endpoints: builder => ({
-    getTags: builder.query<tagsData[], undefined>({
+    getTags: builder.query<TagsData[], undefined>({
       query: () => '/api/tags',
     }),
-    getFriends: builder.query<pagesData, searchData>({
+    getFriends: builder.query<PagesData, QuerySearchData>({
       query: data =>
         `/api/users/friends?page=${data.page}&pageSize=${data.pageSize}`,
     }),
-    getSearchData: builder.query<pagesData, searchData>({
+    getSearchData: builder.query<PagesData, QuerySearchData>({
       query: data =>
         `/api/users/all?page=${data.page}&pageSize=${data.pageSize}${
           data.keyword ? '&keyword=' + data.keyword : ''
         }`,
     }),
-    getAllData: builder.query<pagesData, searchData>({
+    getAllData: builder.query<PagesData, QuerySearchData>({
       query: data =>
         `/api/users/all?page=${data.page}&pageSize=${data.pageSize}${
           data.keyword ? '&keyword=' + data.keyword : ''
